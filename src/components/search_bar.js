@@ -26,7 +26,9 @@ class SearchBar extends React.Component {
     // required render method:
     render() {
         // to watch an event, use onXXXXXXX:
-        return <input onChange={(event) => console.log(event.target.value) } />;
+        // keep track of the state because 
+        return ( <input onChange={event => this.setState({term: event.target.value}) } />
+        )
     }
     // watch for an event:
     onInputChange(event) {
