@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import VideoDetail from './components/video_detail';
 // Youtube search capabilities:
 // download and install package to manage google youtube api requests...
 
@@ -32,6 +33,7 @@ class App extends Component {
         <SearchBar />
         {/*pass data from the parent component 'App' to 'VideoList'  */}
         {/*   this is called passing prop  */}
+       <VideoDetail video={this.state.videos[0]}/>
         <VideoList videos={this.state.videos} />
       </div>
     );
