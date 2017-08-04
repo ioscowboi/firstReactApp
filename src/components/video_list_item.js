@@ -8,19 +8,21 @@ import React from 'react';
 // };
 // or you can just do: 
 //  which says, 'this argument has a property called video, please assign it to a const called video:
-const VideoListItem = ({video}) => {
+const VideoListItem = ({video, onVideoSelect}) => {
     // pull the image url from the video object for use as thumbnail:
     const imageUrl = video.snippet.thumbnails.default.url;
-    return <li className="list-group-item">
-        <div className="video-list media">
-            <div className="media-left">
-                <img className="media-object" src={imageUrl} />
+    return (
+        <li onClick={() => onVideoSelect(video) } className="list-group-item">
+            <div className="video-list media">
+                <div className="media-left">
+                    <img className="media-object" src={imageUrl} />
+                </div>
+                <div className="media-body">
+                    <div className="media-heading">{video.snippet.title}</div>
+                </div>
             </div>
-            <div className="media-body">
-                <div className="media-heading">{video.snippet.title}</div>
-            </div>
-        </div>
-    </li>
+        </li>
+    )
 
 };
 export default VideoListItem;

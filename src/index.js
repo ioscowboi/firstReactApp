@@ -18,10 +18,17 @@ class App extends Component {
   constructor(props){
     super(props);
 
-    this.state = { videos: [] };
+    // ability to select a video starts here:
+    this.state = { 
+      videos: [],
+      selectedVideo: null
+    };
     // Inspect the youtube api search object: 
     YTSearch({key: API_KEY, term: 'surfboards'}, (videos) =>{
-      this.setState({ videos});
+      this.setState({ 
+        videos: videos,
+        selectedVideo: videos[0]
+      });
       //  this.setState({ videos: videos });
     }); 
 
@@ -33,8 +40,11 @@ class App extends Component {
         <SearchBar />
         {/*pass data from the parent component 'App' to 'VideoList'  */}
         {/*   this is called passing prop  */}
-       <VideoDetail video={this.state.videos[0]}/>
-        <VideoList videos={this.state.videos} />
+        {/* pass in the selected video */}
+       <VideoDetail video={this.state.selectedVideo}/>
+          {/* onVideoSelect: updates the app state. This is a concept of passing a function that updates something
+                else: */}
+        <VideoList onVideoSelect={selectedVideo => this.setState({selectedVideo})} videos={this.state.videos} />
       </div>
     );
   }

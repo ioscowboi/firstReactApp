@@ -9,7 +9,10 @@ const VideoList = (props) => {
             // store it in a constant so that it cant be changed:
     const videoItems = props.videos.map((video) => {
         // use a unique key so that react can keep track of its state and update it as needed:
-        return <VideoListItem key={video.etag} video={video} />
+        return <VideoListItem 
+                    onVideoSelect={props.onVideoSelect}
+                    key={video.etag} video={video} 
+                />
      });
     return(
         // use className instead of class to avoid syntax confusion
@@ -18,6 +21,6 @@ const VideoList = (props) => {
             {videoItems}
         </ul>
     );
-}
+};
 
 export default VideoList;
