@@ -46,6 +46,9 @@ class App extends Component {
     // jsx:
     return (
       <div>
+        {/* this is a callback. When something changes in the searchbar, onSearchTermChange is called
+              and data is sent back to onSearchTermChange in the form of a string argument in this case
+        */}
         <SearchBar onSearchTermChange={videoSearch} />
 
         {/*pass data from the parent component 'App' to 'VideoList'  */}
