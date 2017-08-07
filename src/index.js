@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import VideoDetail from './components/video_detail';
@@ -39,10 +40,13 @@ class App extends Component {
     }); 
   } 
   render(){
+
+    // delay/lazy load the search request: 
+    const videoSearch = _.debounce((term) => { this.videoSearch(term) }, 1000);
     // jsx:
     return (
       <div>
-        <SearchBar onSearchTermChange={term => this.videoSearch(term)} />
+        <SearchBar onSearchTermChange={videoSearch} />
 
         {/*pass data from the parent component 'App' to 'VideoList'  */}
         {/*   this is called passing prop  */}
