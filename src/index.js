@@ -16,6 +16,7 @@ const API_KEY = "AIzaSyBSStlhQzhI9-aCOdAJ66qJJyk9ncb2xPY";
 //  access to it: 
 class App extends Component {
   constructor(props){
+    // super is used to call props on the parent class:
     super(props);
 
     // ability to select a video starts here:
@@ -23,25 +24,30 @@ class App extends Component {
       videos: [],
       selectedVideo: null
     };
+
+    this.videoSearch('surfboards');
+  }
+  // create a video callback for the search input field: 
+  videoSearch(term){
     // Inspect the youtube api search object: 
-    YTSearch({key: API_KEY, term: 'surfboards'}, (videos) =>{
+    YTSearch({key: API_KEY, term: term}, (videos) =>{
       this.setState({ 
         videos: videos,
         selectedVideo: videos[0]
       });
       //  this.setState({ videos: videos });
     }); 
-
-  }
+  } 
   render(){
     // jsx:
     return (
       <div>
-        <SearchBar />
+        <SearchBar onSearchTermChange={term => this.videoSearch(term)} />
+
         {/*pass data from the parent component 'App' to 'VideoList'  */}
         {/*   this is called passing prop  */}
         {/* pass in the selected video */}
-       <VideoDetail video={this.state.selectedVideo}/>
+        <VideoDetail video={this.state.selectedVideo}/>
           {/* onVideoSelect: updates the app state. This is a concept of passing a function that updates something
                 else: */}
         <VideoList onVideoSelect={selectedVideo => this.setState({selectedVideo})} videos={this.state.videos} />
